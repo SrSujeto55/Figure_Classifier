@@ -1,0 +1,15 @@
+D:\Facultad\Escuela\Tercer_Semestre\MYP\Proyecto02\bin\Debug\net6.0\Proyecto02.exe
+D:\Facultad\Escuela\Tercer_Semestre\MYP\Proyecto02\bin\Debug\net6.0\Proyecto02.deps.json
+D:\Facultad\Escuela\Tercer_Semestre\MYP\Proyecto02\bin\Debug\net6.0\Proyecto02.runtimeconfig.json
+D:\Facultad\Escuela\Tercer_Semestre\MYP\Proyecto02\bin\Debug\net6.0\Proyecto02.dll
+D:\Facultad\Escuela\Tercer_Semestre\MYP\Proyecto02\bin\Debug\net6.0\Proyecto02.pdb
+D:\Facultad\Escuela\Tercer_Semestre\MYP\Proyecto02\obj\Debug\net6.0\Proyecto02.csproj.AssemblyReference.cache
+D:\Facultad\Escuela\Tercer_Semestre\MYP\Proyecto02\obj\Debug\net6.0\Proyecto02.GeneratedMSBuildEditorConfig.editorconfig
+D:\Facultad\Escuela\Tercer_Semestre\MYP\Proyecto02\obj\Debug\net6.0\Proyecto02.AssemblyInfoInputs.cache
+D:\Facultad\Escuela\Tercer_Semestre\MYP\Proyecto02\obj\Debug\net6.0\Proyecto02.AssemblyInfo.cs
+D:\Facultad\Escuela\Tercer_Semestre\MYP\Proyecto02\obj\Debug\net6.0\Proyecto02.csproj.CoreCompileInputs.cache
+D:\Facultad\Escuela\Tercer_Semestre\MYP\Proyecto02\obj\Debug\net6.0\Proyecto02.dll
+D:\Facultad\Escuela\Tercer_Semestre\MYP\Proyecto02\obj\Debug\net6.0\refint\Proyecto02.dll
+D:\Facultad\Escuela\Tercer_Semestre\MYP\Proyecto02\obj\Debug\net6.0\Proyecto02.pdb
+D:\Facultad\Escuela\Tercer_Semestre\MYP\Proyecto02\obj\Debug\net6.0\Proyecto02.genruntimeconfig.cache
+D:\Facultad\Escuela\Tercer_Semestre\MYP\Proyecto02\obj\Debug\net6.0\ref\Proyecto02.dll
