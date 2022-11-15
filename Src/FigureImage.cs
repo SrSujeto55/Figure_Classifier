@@ -14,7 +14,7 @@ class FigureImage
     {
         _figures = new LinkedList<Figure>();
     }
-
+    
     public void Add(Figure figure)
     {
         _figures.AddLast(figure);
