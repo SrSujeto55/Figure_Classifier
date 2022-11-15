@@ -1,3 +1,6 @@
+namespace Src;
+
+
 enum FigureGroups {
     Quadrilateral,
     Triangles,
@@ -5,3 +8,4 @@ enum FigureGroups {
     Others,
     Null
 };
+
