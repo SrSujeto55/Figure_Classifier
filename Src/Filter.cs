@@ -8,37 +8,37 @@ namespace Src;
 
 class Filter
 {
-    public static Image FilterImage(Bitmap fullImage)
+    public static FigureImage FilterImage(Bitmap fullImage)
     {
-        Image AllImages = new Image();
+        FigureImage AllImages = new FigureImage();
         Color tempColor;
         Color BGColor = fullImage.GetPixel(0,0);
-        set FigureColors = new set();
+        HashSet<Color> figureColors = new HashSet<Color>();
 
-        for(int x = 0; x<Width; x++)
+        for(int x = 0; x< fullImage.Width; x++)
         {
-            for(int y = 0; y<Height; y++)
+            for(int y = 0; y< fullImage.Height; y++)
             {
                 tempColor = fullImage.GetPixel(x,y);
-                if(!tempColor.Equals(BGColor) && tempColor.isNotInSet())
+                if(!tempColor.Equals(BGColor) && !figureColors.Contains(tempColor))
                 {
-                    FigureColors.add(tempColor);
+                    figureColors.Add(tempColor);
                 }
             }
         }
         
-        foreach(Color in FigureColors)
+        foreach(Color color in figureColors)
         {
-            Bitmap Filttered = FilterByColor(fullImage, Color, BGColor);
-            Figure figure = new Figure(Filtered, Color, FigureGroups.NONE);
-            AllImages.add(figure);
+            Bitmap imgFilteredByColor = FilterFigure(fullImage, color, BGColor);
+            Figure colorFigure = new Figure(imgFilteredByColor, color, FigureGroups.Null);
+            AllImages.Add(colorFigure);
         }
 
         return AllImages;
     }
 
 
-    private Bitmap FilterFigure(Bitmap fullImage, Color FilterColor, Color BGColor){
+    private static Bitmap FilterFigure(Bitmap fullImage, Color FilterColor, Color BGColor){
         Color tempColor;
 
         for(int x= 0; x<fullImage.Width; x++)

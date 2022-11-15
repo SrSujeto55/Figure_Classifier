@@ -5,17 +5,24 @@ using System.Text;
 using System.Drawing;
 
 namespace Src;
+
 class Figure
 {
     private FigureGroups _Group;
     private Color _Color;
-    private int[][] _asociatedMatrix;
+    private Bitmap _FilteredImg;
 
-    public Figure(FigureGroups group, Color color, int[][] asociatedMatrix)
+    public Figure(Bitmap filteredImg, Color color, FigureGroups group)
     {   
         _Group = group;
         _Color = color;
-        _asociatedMatrix = asociatedMatrix;
+        _FilteredImg = filteredImg;
+    }
+
+    // Todo: Agregar + _Group.ToString() junto con el método en la enumeración.
+    override public string ToString()
+    {
+        return _Color.ToString();
     }
     
 }
