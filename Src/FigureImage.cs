@@ -40,4 +40,17 @@ class FigureImage
 
         return s;
     }
+
+        // DEPURATION ONLY
+        // Guarda una imagen filtrada para cada Figura en la lista
+    public void SaveAllImg()
+    {
+        int i = 0;
+        foreach (Figure fig in _figures)
+        {
+            fig.SaveImage(i);
+            i++;
+        }
+        Console.WriteLine("Done");
+    }
 }
