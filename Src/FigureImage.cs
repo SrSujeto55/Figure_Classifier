@@ -26,6 +26,22 @@ class FigureImage
     {
         _figures.AddLast(figure);
     }
+
+        //DEPURATION ONLY
+        // Regresa el inicio de la lista
+    public Figure GetFirst()
+    {
+        return _figures.First();
+    }
+
+        // DEPURATION ONLY
+        // Regresa el final de la lista.
+    public Figure GetLast()
+    {
+        return _figures.Last();
+    }
+
+
     
         // @Override, método ToString para convertir las figuras a cadena de tipo string
 
@@ -40,6 +56,8 @@ class FigureImage
 
         return s;
     }
+
+
 
         // DEPURATION ONLY
         // Guarda una imagen filtrada para cada Figura en la lista

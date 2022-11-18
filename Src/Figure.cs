@@ -28,6 +28,22 @@ class Figure
         _FilteredImg = filteredImg;
     }
 
+
+    public Bitmap GetBitmap()
+    {
+        return _FilteredImg;
+    }
+
+    public Color GetColor()
+    {
+        return _Color;
+    }
+
+    public void SetGroup(FigureGroups group)
+    {
+        _Group = group;
+    }
+
         // @Override, Método ToString que se encarga de convertir la información asociada
         // de la figura a una cadena de tipo string.
     override public string ToString()
