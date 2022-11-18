@@ -5,6 +5,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<DisabledWarnings>1416,8618</DisabledWarnings>
   </PropertyGroup>
 
   <ItemGroup>

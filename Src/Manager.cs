@@ -64,6 +64,7 @@ class Manager
         finally
         {
             FigureImage fullImage =  Filter.FilterImage(_imageBitmap);
+
         }
 
 
