@@ -53,20 +53,21 @@ class Filter
         // param BGColor: El color del fondo de la imagen, para evitar considerar dicho color.
 
         // returns <Bitmap> la imagen filtrada con la única figura del color especificado.
-    private static Bitmap FilterFigure(Bitmap fullImage, Color FilterColor, Color BGColor){
+    private static Bitmap FilterFigure(Bitmap fullImage, Color filterColor, Color BGColor){
         Color tempColor;
+        Bitmap filteredImg = (Bitmap)fullImage.Clone();
 
         for(int x= 0; x<fullImage.Width; x++)
         {
             for(int y=0; y<fullImage.Height; y++)
             {
                 tempColor = fullImage.GetPixel(x,y);
-                if(!tempColor.Equals(FilterColor) && !tempColor.Equals(BGColor))
+                if(!tempColor.Equals(filterColor))
                 {
-                    fullImage.SetPixel(x,y,BGColor);
+                    filteredImg.SetPixel(x,y,BGColor);
                 }
             }
         }
-        return fullImage;
+        return filteredImg;
     }
 }

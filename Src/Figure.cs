@@ -34,5 +34,14 @@ class Figure
     {
         return _Color.ToString() + ", Class: " +  _Group.ToString();
     }
+
+
+        // DEPURATION ONLY
+        // Permite guardar una versión de la imagen filtrada en la carpeta raiz
+    public void SaveImage(int identifier)
+    {
+        string srt = "FilteredImageNo_" + identifier + ".bmp";
+        _FilteredImg.Save(srt);
+    }
     
 }
