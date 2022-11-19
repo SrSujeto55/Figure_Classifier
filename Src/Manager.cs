@@ -78,7 +78,6 @@ class Manager
         finally
         {
             FigureImage fullImage = Filter.FilterImage(_imageBitmap);
-            // Ejecutar lógica de fullImage.Clasificate();
             Console.WriteLine("--Agregar Funcionalidad en Manager.Manage--");
         }
     }
