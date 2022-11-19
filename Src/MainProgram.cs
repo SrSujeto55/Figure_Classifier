@@ -11,6 +11,6 @@ class MainProgram
     static void Main(string[] args)
     {
         Manager manager = new Manager(args);
-               
+        manager.Manage();
     }
 }
