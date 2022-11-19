@@ -5,28 +5,34 @@ using System.Text;
 using System.Drawing;
 
 namespace Src;
-//Clase que se encarga de gestionar las demás clases.
 
+/// <summary>
+/// Clase que se encarga de gestionar las demás clases.
+/// </summary>
 class Manager
 {
-
+    /// <value> La ruta de la imagen a trabajar </value>
     private string _pathImage;
 
+    /// <value> el bitmap asociado a la imagen a trabajar </value>
     private Bitmap _imageBitmap;
     
-    // Constructor que recibe los parámetros de la línea de comandos del Main.
+    /// <summary>
+    /// Constructor que recibe los parámetros de la línea de comandos del Main.
+    /// termina el programa si los argumentos exceden el límite de 1
+    /// o en caso contrario, si no recibe parámetros
+    /// </summary>
+    /// 
+    /// <param name="args"> Argumentos del main </param>
+
     public Manager(string[] args)
     {
-
-        // si se introdujo mas de una imagen a analizar.
         if (args.Length > 1)
         {
             Console.Error.WriteLine("Only one image to process at a time is allowed.");
             Environment.Exit(0);
         }
-
-
-        // si se introdujo mas de una imagen a analizar       
+      
         if (args.Length == 0)
         {
             Console.Error.WriteLine("Introduce an image to process as an argument");
@@ -37,15 +43,23 @@ class Manager
 
     }
 
+    /// <summary>
+    /// Revisa si la imagen recibida por parámetros existe
+    /// </summary>
+    /// 
+    /// <returns> true si la imagen existe, false en caso contrario </returns>
     private bool ValidateImage() 
     {
         return File.Exists(_pathImage);
     }
 
+    /// <summary>
+    /// Método inicial que se encarga de ejecutar toda la lógica del programa
+    /// Antes de trabajar con una imagen, se asegura de que dicha imagen existe y que
+    /// pueda ser convertida a la clase Bitmap, en caso contrario termina el programa
+    /// </summary>
     public void Manage()
     {
-        // aqui se llama toda la logica 
-
         if (!ValidateImage())
         {
             Console.Error.WriteLine("Invalid Image");
@@ -63,11 +77,9 @@ class Manager
         }
         finally
         {
-            FigureImage fullImage =  Filter.FilterImage(_imageBitmap);
-
+            FigureImage fullImage = Filter.FilterImage(_imageBitmap);
+            // Ejecutar lógica de fullImage.Clasificate();
+            Console.WriteLine("--Agregar Funcionalidad en Manager.Manage--");
         }
-
-
-
     }
 }
