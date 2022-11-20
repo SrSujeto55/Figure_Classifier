@@ -38,7 +38,10 @@ class FigureClasificator
     /// <returns> figureSignal, un arreglo con la distancia registada de cada uno de los rayos en la figura</returns>
     public static int[] RayCasting(Figure figure)
     {
-        int[] figureSignal = new int[120];
+        //DEPURATION
+        int AngleOfRay = 360;
+
+        int[] figureSignal = new int[AngleOfRay];
 
         int[] figureCenter = GetFigureCenter(figure);
         int XCenter = figureCenter[0];
@@ -49,10 +52,12 @@ class FigureClasificator
 
         int hypotenuse = SetAvarageHypo(filteredFigure, figureColor, figureCenter);
 
-        for(int degree = 0; degree < 360; degree += 3)
+        for(int degree = 0; degree < AngleOfRay; degree++)
         {
-            double unitX = Math.Cos(degree)*hypotenuse;
-            double unitY = Math.Sin(degree)*hypotenuse;
+            double radVersion = degree*(Math.PI/180);
+
+            double unitX = Math.Cos(radVersion)*hypotenuse;
+            double unitY = Math.Sin(radVersion)*hypotenuse;
 
             unitX = XCenter + unitX;
             unitY = YCenter + unitY;
@@ -66,7 +71,7 @@ class FigureClasificator
             double YCoord = YCenter;
 
             bool thresholdReached = false;
-            int RayLength = 0;
+            int RayLength = 1;
 
             while (!thresholdReached)
             {
@@ -78,12 +83,9 @@ class FigureClasificator
                     thresholdReached = true;
                     break;
                 }
-
                 RayLength++;
             }
-
-            figureSignal[degree/3] = RayLength;
-
+            figureSignal[degree] = RayLength;
         }
         return figureSignal;
     }
