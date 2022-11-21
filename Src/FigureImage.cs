@@ -25,21 +25,25 @@ class FigureImage
     /// Agrega una figura a la lista
     /// </summary>
     /// 
-    /// <param name="figure"> la figura que se agregará </param>
+    /// <param name="figure"> la figura que se agregarï¿½ </param>
     public void Add(Figure figure)
     {
         _figures.AddLast(figure);
     }
 
-    //DEPURATION ONLY
-    // Regresa el inicio de la lista
+    /// <summary>
+    /// regresa la primera figura de la lista de figuras.
+    /// </summary>
+    /// <returns> regresa la primera figura de la lista de figuras. </returns> 
     public Figure GetFirst()
     {
         return _figures.First();
     }
 
-    // DEPURATION ONLY
-    // Regresa el final de la lista.
+    /// <summary>
+    /// regresa la Ãºltima figura de la lista de figuras.
+    /// </summary>
+    /// <returns> regresa la Ãºltima figura de la lista de figuras. </returns> 
     public Figure GetLast()
     {
         return _figures.Last();
@@ -62,7 +66,7 @@ class FigureImage
         return s;
     }
 
-    //Agregar Método Clasificate para clasificar todas las fguras con un foreach.
+    //Agregar Mï¿½todo Clasificate para clasificar todas las fguras con un foreach.
 
     // DEPURATION ONLY
     // Guarda una imagen filtrada para cada Figura en la lista
