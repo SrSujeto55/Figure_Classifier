@@ -9,7 +9,7 @@ namespace Src.Tests
         private Figure _figure;
         public Figure_IsFigureShould()
         {
-            _figure = new Figure(null, Color.AliceBlue, FigureGroups.Quadrilateral);
+            _figure = new Figure(null, Color.Blue, FigureGroups.Quadrilateral);
         }
 
         #region Sample_TestCode
@@ -18,7 +18,7 @@ namespace Src.Tests
         public void ToStringTest_ShouldFigure(int n)
         {
             String s1 = _figure.ToString();
-            String s2 = "Color [AliceBlue], Class: Quadrilateral";
+            String s2 = "0000FF = C";
             Assert.True(s1.Equals(s2), "Should equals");
         }
         #endregion
