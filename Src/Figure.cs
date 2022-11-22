@@ -19,7 +19,7 @@ class Figure
     /// <value> El color asociado a la figura [Alpha, Rojo, Azul, Verde] </value>
     private Color _Color;
 
-    /// <value> La imagen que contiene únicamente a la figura para su manejo </value>
+    /// <value> La imagen que contiene ï¿½nicamente a la figura para su manejo </value>
     private Bitmap _FilteredImg;
 
 
@@ -30,9 +30,9 @@ class Figure
     /// 
     /// <param name="filteredImg"> La imagen Filtrada que contiene unicamente la figura </param>
     /// <param name="color"> El color asociado a la figura </param>
-    /// <param name="group"> El grupo de clasificación al que pertenece la figura </param>
+    /// <param name="group"> El grupo de clasificaciï¿½n al que pertenece la figura </param>
     public Figure(Bitmap filteredImg, Color color, FigureGroups group)
-    {   
+    {
         _Group = group;
         _Color = color;
         _FilteredImg = filteredImg;
@@ -60,7 +60,7 @@ class Figure
     /// Asocia un grupo a la figura
     /// </summary>
     /// 
-    /// <param name="group"> El grupo que se le asociará a la figura</param>
+    /// <param name="group"> El grupo que se le asociarï¿½ a la figura</param>
     public void SetGroup(FigureGroups group)
     {
         _Group = group;
@@ -68,23 +68,40 @@ class Figure
 
     /// @override
     /// <summary>
-    /// Convierte a tipo string la información importante de la figura tales como
+    /// Convierte a tipo string la informaciï¿½n importante de la figura tales como
     /// El color
-    /// La clasificación 
+    /// La clasificaciï¿½n 
     /// </summary>
-    /// <returns> string asociado a la figura con la información más relevante </returns> 
+    /// <returns> string asociado a la figura con la informaciï¿½n mï¿½s relevante </returns> 
     override public string ToString()
     {
-        return _Color.ToString() + ", Class: " +  _Group.ToString();
+        return AuxColor(_Color) + " = " + AuxEnum(_Group.ToString());
     }
 
+    private static string AuxEnum(String group)
+    {
+        Dictionary<string, string> options = new Dictionary<string, string>();
+        options.Add("Quadrilateral", "C");
+        options.Add("Triangles", "T");
+        options.Add("Circles", "O");
+        options.Add("Others", "X");
+        string option = options[group];
+        options.Clear();
+        return option;
+    }
+
+    private static string AuxColor(Color color)
+    {
+        string hex = color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
+        return hex;
+    }
 
     // DEPURATION ONLY
-    // Permite guardar una versión de la imagen filtrada en la carpeta raiz
+    // Permite guardar una versiï¿½n de la imagen filtrada en la carpeta raiz
     public void SaveImage(int identifier)
     {
         string srt = "FilteredImageNo_" + identifier + ".bmp";
         _FilteredImg.Save(srt);
     }
-    
+
 }
