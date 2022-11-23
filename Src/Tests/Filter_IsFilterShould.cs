@@ -22,6 +22,7 @@ namespace Src.Tests
         {
             FigureImage list = Filter.FilterImage(_bitmap);
             Figure figure = list.GetFirst();
+            figure.SetGroup(FigureGroups.Triangles);
             Color colorFigure = figure.GetColor();
             Color background = _bitmap.GetPixel(0,0);
             Assert.True(!colorFigure.Equals(background));
