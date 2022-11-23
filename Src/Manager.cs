@@ -78,7 +78,7 @@ class Manager
         finally
         {
             FigureImage fullImage = Filter.FilterImage(_imageBitmap);
-            Console.WriteLine("--Agregar Funcionalidad en Manager.Manage--");
+            FigureClasificator.Clasificate(fullImage.GetN(0));
         }
     }
 }

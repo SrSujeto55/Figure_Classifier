@@ -22,7 +22,21 @@ class FigureClasificator
 
     public static void Clasificate(Figure figure)
     {
-        int[] figureSignal = RayCasting(figure);
+        Bitmap original = figure.GetBitmap();
+        Bitmap IMG = (Bitmap)original.Clone();
+        // figura, angulo de inicio, angulo final (diferencia debe ser 360)
+        int[] figureSignal = RayCasting(figure, 180, 540);
+        //LinkedList<int> smoothie = SmoothSignal(figureSignal, 2);
+        //int PeaksAgain = GetFigurePeaks(smoothie);
+        //Console.WriteLine(PeaksAgain);
+        string s = "[";
+        foreach(int num in smoothie)
+        {
+            s += num + ", ";
+        }
+        s += "]";
+        Console.WriteLine(s);
+        IMG.Save("FigureAnalized.bmp");
         // Llama a calcularPicos(int [] Signal) Retruns: FigureGroup
         // asignamos el figure grupo a la figura con setFigureGroup
     }
@@ -36,12 +50,10 @@ class FigureClasificator
     /// <param name="figure"> la figura de la que se evaluará la distancia del centro a los bordes </param>
     ///
     /// <returns> figureSignal, un arreglo con la distancia registada de cada uno de los rayos en la figura</returns>
-    public static int[] RayCasting(Figure figure)
+    public static int[] RayCasting(Figure figure, int gradini, int gradfin)
     {
-        //DEPURATION
-        int AngleOfRay = 360;
 
-        int[] figureSignal = new int[AngleOfRay];
+        int[] figureSignal = new int[120];
 
         int[] figureCenter = GetFigureCenter(figure);
         int XCenter = figureCenter[0];
@@ -51,8 +63,8 @@ class FigureClasificator
         Bitmap filteredFigure = figure.GetBitmap();
 
         int hypotenuse = SetAvarageHypo(filteredFigure, figureColor, figureCenter);
-
-        for(int degree = 0; degree < AngleOfRay; degree++)
+        int IND = 0;
+        for(int degree = gradini; degree < gradfin; degree += 3)
         {
             double radVersion = degree*(Math.PI/180);
 
@@ -85,8 +97,11 @@ class FigureClasificator
                 }
                 RayLength++;
             }
-            figureSignal[degree] = RayLength;
+
+            figureSignal[IND] = RayLength;
+            IND++;
         }
+        Console.WriteLine(IND);
         return figureSignal;
     }
 
@@ -119,7 +134,6 @@ class FigureClasificator
 
         return Hypotenuse/2;
     }
-
 
     /// <summary>
     /// Método privado estático encargado de encontrar el centro de una figura
@@ -164,5 +178,68 @@ class FigureClasificator
 
        return centerCoords;
     }
-    
+
+    private static int GetFigurePeaks(LinkedList<int> smoothSignal)
+    {
+        int[] smoothArr = smoothSignal.ToArray();
+        LinkedList<int> peakIndices = new LinkedList<int>();
+        int peakIndex = -1;
+        int peakValue = -1;
+        int baseline = (int)smoothArr.Average();
+        Console.WriteLine("Baselina: " + baseline);
+        for(int i = 0; i<smoothArr.Length; i++)
+        {
+            if (smoothArr[i] > baseline)
+            {
+                if(peakValue == -1 || smoothArr[i] > peakValue)
+                {
+                    peakValue = smoothArr[i];
+                    peakIndex = i;
+                }
+            }
+            else if (peakIndex != -1)
+            {
+                peakIndices.AddLast(peakIndex);
+                peakIndex = -1;
+                peakValue = -1;
+            }
+        }
+        if(peakIndex != -1)
+        {
+            peakIndices.AddLast(peakIndex);
+        }
+        return peakIndices.Count;
+    }
+
+    private static int GetAverage(int[] peaks, int low, int high)
+    {
+        int sum = 0;
+
+        int total = high-low;
+
+        for(int idx = low; idx <= high; idx++)
+        {
+            sum += peaks[idx];
+        }
+
+
+        return sum/total;
+    }
+
+    private static LinkedList<int> SmoothSignal(int[] peaksArray, int smothie)
+    {
+        LinkedList<int> smoothSignal = new LinkedList<int>();
+
+
+        for(int idx = smothie ;idx < peaksArray.Length-smothie; idx++)
+        {
+            int val = peaksArray[idx];
+
+
+            smoothSignal.AddLast(GetAverage(peaksArray,idx-smothie,idx+smothie)); 
+        }
+
+
+        return smoothSignal;
+    }
 }

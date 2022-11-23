@@ -49,6 +49,11 @@ class FigureImage
         return _figures.Last();
     }
 
+    public Figure GetN(int i)
+    {
+        return _figures.ElementAt(i);
+    }
+
 
     /// @Override
     /// <summary>
