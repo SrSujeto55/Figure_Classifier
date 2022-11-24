@@ -78,30 +78,33 @@ class Figure
         return AuxColor(_Color) + " = " + AuxEnum(_Group.ToString());
     }
 
-    private static string AuxEnum(String group)
+    /// <summary>
+    /// Nos permite Asignar un caracter en base a la clase de la figura
+    /// </summary>
+    /// 
+    /// <param name="group"> el grupo que se quiere convertir </param>
+    /// <return> selectedOption, un string con el el char caracteristico de la clase de la figura </return>
+    private static string AuxEnum(String figuregroup)
     {
-        Dictionary<string, string> options = new Dictionary<string, string>();
-        options.Add("Quadrilateral", "C");
-        options.Add("Triangles", "T");
-        options.Add("Circles", "O");
-        options.Add("Others", "X");
-        string option = options[group];
-        options.Clear();
-        return option;
+        Dictionary<string, string> figureOptions = new Dictionary<string, string>();
+        figureOptions.Add("Quadrilateral", "C");
+        figureOptions.Add("Triangles", "T");
+        figureOptions.Add("Circles", "O");
+        figureOptions.Add("Others", "X");
+        string selectedOption = figureOptions[figuregroup];
+        figureOptions.Clear();
+        return selectedOption;
     }
 
+    /// <summary>
+    /// Convierte el atributo Color de una figura a su string hexadecimal
+    /// </summary>
+    /// 
+    /// <param name="color"> El color a transformar de ARGB a hexadecimal </param>
+    /// <return> el Color hexadecimal asociado a la figura </return>
     private static string AuxColor(Color color)
     {
-        string hex = color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
-        return hex;
+        string hexColor = color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
+        return hexColor;
     }
-
-    // DEPURATION ONLY
-    // Permite guardar una versi�n de la imagen filtrada en la carpeta raiz
-    public void SaveImage(int identifier)
-    {
-        string srt = "FilteredImageNo_" + identifier + ".bmp";
-        _FilteredImg.Save(srt);
-    }
-
 }

@@ -79,7 +79,8 @@ class Manager
         finally
         {
             FigureImage fullImage = Filter.FilterImage(_imageBitmap);
-            FigureClasificator.Clasificate(fullImage.GetN(0));
+            fullImage.Clasificate();
+            Console.WriteLine(fullImage.ToString());
         }
     }
 }
