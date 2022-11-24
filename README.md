@@ -58,7 +58,7 @@ donde:
 **NOTA: La imagen a procesar debe contener figuras geométricas (regulares o irregulares) de colores distintos, y con fondo de color fijo. Además de que debe tener extensión _.bmp_** 
 
 ### PDF con mas detalles del proyecto
- * http://example.com/file.pdf 
+ * https://drive.google.com/file/d/1pJyAcMRbkrQlQ6HuIE65QSrejXKPPqk1/view 
 
 ## Contacto 
 Julián Rosas Scull - julian.rosas@ciencias.unam.mx
@@ -66,3 +66,5 @@ Julián Rosas Scull - julian.rosas@ciencias.unam.mx
 Ricardo Flores Mata - ricardo_fm77@ciencias.unam.mx
 
 Emiliano López Prado - emilianolp@ciencias.unam.mx
+
+Link del proyecto - https://github.com/SrSujeto55/Proyecto02
