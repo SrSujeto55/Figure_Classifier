@@ -19,7 +19,7 @@ class Figure
     /// <value> El color asociado a la figura [Alpha, Rojo, Azul, Verde] </value>
     private Color _Color;
 
-    /// <value> La imagen que contiene �nicamente a la figura para su manejo </value>
+    /// <value> La imagen que contiene únicamente a la figura para su manejo </value>
     private Bitmap _FilteredImg;
 
 
@@ -30,7 +30,7 @@ class Figure
     /// 
     /// <param name="filteredImg"> La imagen Filtrada que contiene unicamente la figura </param>
     /// <param name="color"> El color asociado a la figura </param>
-    /// <param name="group"> El grupo de clasificaci�n al que pertenece la figura </param>
+    /// <param name="group"> El grupo de clasificación al que pertenece la figura </param>
     public Figure(Bitmap filteredImg, Color color, FigureGroups group)
     {
         _Group = group;
@@ -60,7 +60,7 @@ class Figure
     /// Asocia un grupo a la figura
     /// </summary>
     /// 
-    /// <param name="group"> El grupo que se le asociar� a la figura</param>
+    /// <param name="group"> El grupo que se le asociará a la figura</param>
     public void SetGroup(FigureGroups group)
     {
         _Group = group;
@@ -68,11 +68,11 @@ class Figure
 
     /// @override
     /// <summary>
-    /// Convierte a tipo string la informaci�n importante de la figura tales como
+    /// Convierte a tipo string la información importante de la figura tales como
     /// El color
-    /// La clasificaci�n 
+    /// La clasificación 
     /// </summary>
-    /// <returns> string asociado a la figura con la informaci�n m�s relevante </returns> 
+    /// <returns> string asociado a la figura con la información más relevante </returns> 
     override public string ToString()
     {
         return AuxColor(_Color) + " = " + AuxEnum(_Group.ToString());
