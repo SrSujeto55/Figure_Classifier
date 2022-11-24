@@ -4,6 +4,7 @@ using System.Drawing;
 namespace Src.Tests
 {
     /// Comprueba que la clase Filter filtre correctamente. 
+    #pragma warning disable CA1416, xUnit1026
     public class Filter_IsFilterShould
     {   
         private Bitmap _bitmap;

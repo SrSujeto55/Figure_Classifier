@@ -9,6 +9,7 @@ namespace Src;
 /// <summary>
 ///  Esta clase se encarga de clasificar una figura en espec�fico asignandole un grupo de los 4 disponibles
 /// </summary>
+#pragma warning disable CA1416
 class FigureClasificator
 {
     /// <summary>

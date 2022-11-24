@@ -9,6 +9,7 @@ namespace Src;
 /// <summary>
 /// Clase que se encarga de gestionar las dem�s clases.
 /// </summary>
+#pragma warning disable CS8625, CA1416, CS8618
 class Manager
 {
     /// <value> La ruta de la imagen a trabajar </value>

@@ -10,7 +10,7 @@ namespace Src;
 /// Clase para definir una figura.
 /// Una figura tiene color, un grupo y una imagen filtrada
 /// </summary>
-
+#pragma warning disable CA1416
 class Figure
 {
     /// <value> El grupo al que pertenece la figura </value>
