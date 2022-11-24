@@ -7,18 +7,18 @@ using System.Text;
 namespace Src;
 
 /// <summary>
-///  Esta clase se encarga de clasificar una figura en espec�fico asignandole un grupo de los 4 disponibles
+///  Esta clase se encarga de clasificar una figura en específico asignandole un grupo de los 4 disponibles
 /// </summary>
 #pragma warning disable CA1416
 class FigureClasificator
 {
     /// <summary>
-    /// Este m�todo se encarga de llamar a los algoritmos auxiliares encargados de 
-    /// asignar toda la l�gica detr�s de clasificar una figura, al final se le asigna
-    /// dicha clasificaci�n como atributo de la figura en cuesti�n
+    /// Este método se encarga de llamar a los algoritmos auxiliares encargados de 
+    /// asignar toda la logica detrás de clasificar una figura, al final se le asigna
+    /// dicha clasificación como atributo de la figura en cuestión
     /// </summary>
     /// 
-    /// <param name="figure"> la figura que se clasificar� </param>
+    /// <param name="figure"> la figura que se clasificará </param>
     public static void Clasificate(Figure figure)
     {
         Bitmap originalImage = figure.GetBitmap();
@@ -72,12 +72,12 @@ class FigureClasificator
     }
 
     /// <summary>
-    /// M�todo privado est�tico encargado de evaluar la distancia que existe entre el centro de la figura
+    /// Método privado estático encargado de evaluar la distancia que existe entre el centro de la figura
     /// hasta chocar con un borde de la misma, realiza este proceso radialmente hasta cubrir por completo
     /// toda la figura.
     /// </summary>
     ///
-    /// <param name="figure"> la figura de la que se evaluar� la distancia del centro a los bordes </param>
+    /// <param name="figure"> la figura de la que se evaluará la distancia del centro a los bordes </param>
     /// <param name="gradIni"> El ángulo donde empezamos a lanzar rayos </param>
     /// <param name="gradFin"> El ángulo final donde paramos de lanzar rayos (la diferencia con gradIni debe ser 360) </param>
     /// <returns> figureSignal, un arreglo con la distancia registada de cada uno de los rayos en la figura</returns>
@@ -135,10 +135,10 @@ class FigureClasificator
     }
 
     /// <summary>
-    /// M�todo privado est�tico encargado de encontrar el centro de una figura
+    /// Método privado estático encargado de encontrar el centro de una figura
     /// </summary>
     /// 
-    /// <param name="figure"> la figura que se clasificar� </param>
+    /// <param name="figure"> la figura que se clasificará </param>
     /// 
     /// <returns> centerCoords, un arreglo con las coordenadas del centro de la figura</returns>
     private static int[] GetFigureCenter(Figure figure)

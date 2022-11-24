@@ -38,7 +38,7 @@ class FigureImage
     /// Agrega una figura a la lista
     /// </summary>
     /// 
-    /// <param name="figure"> la figura que se agregar� </param>
+    /// <param name="figure"> la figura que se agregará </param>
     public void Add(Figure figure)
     {
         _figures.AddLast(figure);
