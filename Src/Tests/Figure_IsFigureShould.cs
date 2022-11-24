@@ -4,6 +4,7 @@ using System.Drawing;
 namespace Src.Tests
 {
     /// Prueba el ToString de la clase Figure.
+    #pragma warning disable CS8625, xUnit1026
     public class Figure_IsFigureShould
     {
         private Figure _figure;

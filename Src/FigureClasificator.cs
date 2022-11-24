@@ -7,18 +7,18 @@ using System.Text;
 namespace Src;
 
 /// <summary>
-///  Esta clase se encarga de clasificar una figura en específico asignandole un grupo de los 4 disponibles
+///  Esta clase se encarga de clasificar una figura en especï¿½fico asignandole un grupo de los 4 disponibles
 /// </summary>
-
+#pragma warning disable CA1416
 class FigureClasificator
 {
     /// <summary>
-    /// Este método se encarga de llamar a los algoritmos auxiliares encargados de 
-    /// asignar toda la lógica detrás de clasificar una figura, al final se le asigna
-    /// dicha clasificación como atributo de la figura en cuestión
+    /// Este mï¿½todo se encarga de llamar a los algoritmos auxiliares encargados de 
+    /// asignar toda la lï¿½gica detrï¿½s de clasificar una figura, al final se le asigna
+    /// dicha clasificaciï¿½n como atributo de la figura en cuestiï¿½n
     /// </summary>
     /// 
-    /// <param name="figure"> la figura que se clasificará </param>
+    /// <param name="figure"> la figura que se clasificarï¿½ </param>
 
     public static void Clasificate(Figure figure)
     {
@@ -29,25 +29,25 @@ class FigureClasificator
         //LinkedList<int> smoothie = SmoothSignal(figureSignal, 2);
         //int PeaksAgain = GetFigurePeaks(smoothie);
         //Console.WriteLine(PeaksAgain);
-        string s = "[";
-        foreach(int num in smoothie)
-        {
-            s += num + ", ";
-        }
-        s += "]";
-        Console.WriteLine(s);
-        IMG.Save("FigureAnalized.bmp");
+        // string s = "[";
+        // foreach(int num in smoothie)
+        // {
+        //     s += num + ", ";
+        // }
+        // s += "]";
+        // Console.WriteLine(s);
+        // IMG.Save("FigureAnalized.bmp");
         // Llama a calcularPicos(int [] Signal) Retruns: FigureGroup
         // asignamos el figure grupo a la figura con setFigureGroup
     }
 
     /// <summary>
-    /// Método privado estático encargado de evaluar la distancia que existe entre el centro de la figura
+    /// Mï¿½todo privado estï¿½tico encargado de evaluar la distancia que existe entre el centro de la figura
     /// hasta chocar con un borde de la misma, realiza este proceso radialmente hasta cubrir por completo
     /// toda la figura.
     /// </summary>
     ///
-    /// <param name="figure"> la figura de la que se evaluará la distancia del centro a los bordes </param>
+    /// <param name="figure"> la figura de la que se evaluarï¿½ la distancia del centro a los bordes </param>
     ///
     /// <returns> figureSignal, un arreglo con la distancia registada de cada uno de los rayos en la figura</returns>
     public static int[] RayCasting(Figure figure, int gradini, int gradfin)
@@ -106,11 +106,11 @@ class FigureClasificator
     }
 
     /// <summary>
-    /// Método privado estático encargado de asignar una hipotenusa adecuada para realizar cálculos 
-    /// en función del tamaño de una <c>figura</c>.
+    /// Mï¿½todo privado estï¿½tico encargado de asignar una hipotenusa adecuada para realizar cï¿½lculos 
+    /// en funciï¿½n del tamaï¿½o de una <c>figura</c>.
     /// </summary>
     /// 
-    /// <param name="filteredImg"> la imagen filtrada con únicamente la figura a tratar </param>
+    /// <param name="filteredImg"> la imagen filtrada con ï¿½nicamente la figura a tratar </param>
     /// <param name="figureColor"> El color de la figura a tratar </param>
     /// <param name="figureCenter"> EL centro en coordenadas de la figura a tratar </param>
     /// 
@@ -136,10 +136,10 @@ class FigureClasificator
     }
 
     /// <summary>
-    /// Método privado estático encargado de encontrar el centro de una figura
+    /// Mï¿½todo privado estï¿½tico encargado de encontrar el centro de una figura
     /// </summary>
     /// 
-    /// <param name="figure"> la figura que se clasificará </param>
+    /// <param name="figure"> la figura que se clasificarï¿½ </param>
     /// 
     /// <returns> centerCoords, un arreglo con las coordenadas del centro de la figura</returns>
     private static int[] GetFigureCenter(Figure figure)
