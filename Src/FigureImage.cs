@@ -15,10 +15,23 @@ class FigureImage
     /// <value> La lista del tipo <Figure> que almacena las figuras </value>
     private LinkedList<Figure> _figures;
 
-    /// <value> Constructor de clase que se encarga de inicializar la lista </value>
+    /// <summary>
+    /// Constructor de clase, inicializa la lista
+    /// </summary>
     public FigureImage()
     {
         _figures = new LinkedList<Figure>();
+    }
+
+    /// <summary>
+    /// Para cada figura en la lista de figuras, ejecuta su clasificación y queda asignado para 
+    /// cada figura
+    /// </summary>
+    public void Clasificate()
+    {
+        foreach(Figure fig in _figures){
+            FigureClasificator.Clasificate(fig);
+        }
     }
     
     /// <summary>
@@ -49,40 +62,19 @@ class FigureImage
         return _figures.Last();
     }
 
-    public Figure GetN(int i)
-    {
-        return _figures.ElementAt(i);
-    }
-
-
     /// @Override
     /// <summary>
-    /// transforma a string todas las figuras en la lista
+    /// transforma a string todas las figuras en la lista, usando sus respectivos ToString
     /// </summary>
     /// <returns> string asociado a todas las figuras en la lista </returns> 
     override public string ToString()
     {
-        string s = "";
+        string data = "";
         foreach (Figure figure in _figures)
         {
-            s+= figure.ToString() + "\n";            
+            data+= figure.ToString() + "\n";            
         }
 
-        return s;
-    }
-
-    //Agregar M�todo Clasificate para clasificar todas las fguras con un foreach.
-
-    // DEPURATION ONLY
-    // Guarda una imagen filtrada para cada Figura en la lista
-    public void SaveAllImg()
-    {
-        int i = 0;
-        foreach (Figure fig in _figures)
-        {
-            fig.SaveImage(i);
-            i++;
-        }
-        Console.WriteLine("Done");
+        return data;
     }
 }

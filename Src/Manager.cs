@@ -7,7 +7,7 @@ using System.Drawing;
 namespace Src;
 
 /// <summary>
-/// Clase que se encarga de gestionar las demás clases.
+/// Clase que se encarga de gestionar las demï¿½s clases.
 /// </summary>
 class Manager
 {
@@ -18,9 +18,9 @@ class Manager
     private Bitmap _imageBitmap;
     
     /// <summary>
-    /// Constructor que recibe los parámetros de la línea de comandos del Main.
-    /// termina el programa si los argumentos exceden el límite de 1
-    /// o en caso contrario, si no recibe parámetros
+    /// Constructor que recibe los parï¿½metros de la lï¿½nea de comandos del Main.
+    /// termina el programa si los argumentos exceden el lï¿½mite de 1
+    /// o en caso contrario, si no recibe parï¿½metros
     /// </summary>
     /// 
     /// <param name="args"> Argumentos del main </param>
@@ -44,7 +44,7 @@ class Manager
     }
 
     /// <summary>
-    /// Revisa si la imagen recibida por parámetros existe
+    /// Revisa si la imagen recibida por parï¿½metros existe
     /// </summary>
     /// 
     /// <returns> true si la imagen existe, false en caso contrario </returns>
@@ -54,7 +54,7 @@ class Manager
     }
 
     /// <summary>
-    /// Método inicial que se encarga de ejecutar toda la lógica del programa
+    /// Mï¿½todo inicial que se encarga de ejecutar toda la lï¿½gica del programa
     /// Antes de trabajar con una imagen, se asegura de que dicha imagen existe y que
     /// pueda ser convertida a la clase Bitmap, en caso contrario termina el programa
     /// </summary>
@@ -78,7 +78,8 @@ class Manager
         finally
         {
             FigureImage fullImage = Filter.FilterImage(_imageBitmap);
-            FigureClasificator.Clasificate(fullImage.GetN(0));
+            fullImage.Clasificate();
+            Console.WriteLine(fullImage.ToString());
         }
     }
 }

@@ -7,53 +7,82 @@ using System.Text;
 namespace Src;
 
 /// <summary>
-///  Esta clase se encarga de clasificar una figura en específico asignandole un grupo de los 4 disponibles
+///  Esta clase se encarga de clasificar una figura en especï¿½fico asignandole un grupo de los 4 disponibles
 /// </summary>
-
 class FigureClasificator
 {
     /// <summary>
-    /// Este método se encarga de llamar a los algoritmos auxiliares encargados de 
-    /// asignar toda la lógica detrás de clasificar una figura, al final se le asigna
-    /// dicha clasificación como atributo de la figura en cuestión
+    /// Este mï¿½todo se encarga de llamar a los algoritmos auxiliares encargados de 
+    /// asignar toda la lï¿½gica detrï¿½s de clasificar una figura, al final se le asigna
+    /// dicha clasificaciï¿½n como atributo de la figura en cuestiï¿½n
     /// </summary>
     /// 
-    /// <param name="figure"> la figura que se clasificará </param>
-
+    /// <param name="figure"> la figura que se clasificarï¿½ </param>
     public static void Clasificate(Figure figure)
     {
-        Bitmap original = figure.GetBitmap();
-        Bitmap IMG = (Bitmap)original.Clone();
-        // figura, angulo de inicio, angulo final (diferencia debe ser 360)
-        int[] figureSignal = RayCasting(figure, 180, 540);
-        //LinkedList<int> smoothie = SmoothSignal(figureSignal, 2);
-        //int PeaksAgain = GetFigurePeaks(smoothie);
-        //Console.WriteLine(PeaksAgain);
-        string s = "[";
-        foreach(int num in smoothie)
-        {
-            s += num + ", ";
+        Bitmap originalImage = figure.GetBitmap();
+        int[] figureSignal = RayCasting(figure, 90, 450);
+
+        int Smoother = originalImage.Width < 120 ? 8 : 15;
+
+        LinkedList<int> smootherSignal = SmoothSignal(figureSignal, Smoother);
+
+        int [] ARRSmoothSignal = smootherSignal.ToArray();
+        Array.Sort(ARRSmoothSignal);
+
+        if(IsCircle(ARRSmoothSignal)){
+            figure.SetGroup(FigureGroups.Circles);
+            return;
         }
-        s += "]";
-        Console.WriteLine(s);
-        IMG.Save("FigureAnalized.bmp");
-        // Llama a calcularPicos(int [] Signal) Retruns: FigureGroup
-        // asignamos el figure grupo a la figura con setFigureGroup
+        
+        int numberOfPeaks = GetFigurePeaks(smootherSignal);
+        figure.SetGroup(GetFigureGroup(numberOfPeaks));
     }
 
     /// <summary>
-    /// Método privado estático encargado de evaluar la distancia que existe entre el centro de la figura
+    /// Obtenemos el grupo al que pertenece la figura en funciÃ³n del nÃºmero de 
+    /// picos registrados.
+    /// </summary>
+    /// 
+    /// <param name="peakNumber"> El nÃºmero de picos registrados </param>
+    /// <return> El grupo al que pertenece la figura </return>
+    private static FigureGroups GetFigureGroup(int peakNumber)
+    {
+        if(peakNumber <= 3)
+            return FigureGroups.Triangles;
+        if(peakNumber == 4 || peakNumber == 5)
+            return FigureGroups.Quadrilateral;
+        return FigureGroups.Others;
+    }
+
+    /// <summary>
+    /// Revisamos la seÃ±al recibida, si el valor mÃ¡xima y mÃ­nima de Ã©sta
+    /// resulta ser menor a 8, entonces se trata de un cÃ­rculo.
+    /// </summary>
+    /// 
+    /// <param name="sortedSignal"> La seÃ±al ordenada </param>
+    /// <return> Si la seÃ±al se atribuye a un cÃ­rculo </return>
+    private static bool IsCircle(int[] sortedSignal)
+    {
+        int max = sortedSignal[sortedSignal.Length-1];
+        int min = sortedSignal[0];
+        
+        return (max-min) < 8;
+    }
+
+    /// <summary>
+    /// Mï¿½todo privado estï¿½tico encargado de evaluar la distancia que existe entre el centro de la figura
     /// hasta chocar con un borde de la misma, realiza este proceso radialmente hasta cubrir por completo
     /// toda la figura.
     /// </summary>
     ///
-    /// <param name="figure"> la figura de la que se evaluará la distancia del centro a los bordes </param>
-    ///
+    /// <param name="figure"> la figura de la que se evaluarï¿½ la distancia del centro a los bordes </param>
+    /// <param name="gradIni"> El Ã¡ngulo donde empezamos a lanzar rayos </param>
+    /// <param name="gradFin"> El Ã¡ngulo final donde paramos de lanzar rayos (la diferencia con gradIni debe ser 360) </param>
     /// <returns> figureSignal, un arreglo con la distancia registada de cada uno de los rayos en la figura</returns>
-    public static int[] RayCasting(Figure figure, int gradini, int gradfin)
+    public static int[] RayCasting(Figure figure, int gradIni, int gradFin)
     {
-
-        int[] figureSignal = new int[120];
+        int[] figureSignal = new int[360];
 
         int[] figureCenter = GetFigureCenter(figure);
         int XCenter = figureCenter[0];
@@ -62,9 +91,9 @@ class FigureClasificator
         Color figureColor = figure.GetColor();
         Bitmap filteredFigure = figure.GetBitmap();
 
-        int hypotenuse = SetAvarageHypo(filteredFigure, figureColor, figureCenter);
-        int IND = 0;
-        for(int degree = gradini; degree < gradfin; degree += 3)
+        int hypotenuse = 4;
+        int index = 0;
+        for(int degree = gradIni; degree < gradFin; degree += 1)
         {
             double radVersion = degree*(Math.PI/180);
 
@@ -90,7 +119,7 @@ class FigureClasificator
                 YCoord += dy/stepsNumber;
                 XCoord += dx/stepsNumber;
 
-                if(!filteredFigure.GetPixel((int)Math.Floor(XCoord), (int)Math.Floor(YCoord)).Equals(figureColor))
+                if(!filteredFigure.GetPixel((int)Math.Ceiling(XCoord), (int)Math.Ceiling(YCoord)).Equals(figureColor))
                 {
                     thresholdReached = true;
                     break;
@@ -98,65 +127,30 @@ class FigureClasificator
                 RayLength++;
             }
 
-            figureSignal[IND] = RayLength;
-            IND++;
+            figureSignal[index] = RayLength;
+            index++;
         }
-        Console.WriteLine(IND);
         return figureSignal;
     }
 
     /// <summary>
-    /// Método privado estático encargado de asignar una hipotenusa adecuada para realizar cálculos 
-    /// en función del tamaño de una <c>figura</c>.
+    /// Mï¿½todo privado estï¿½tico encargado de encontrar el centro de una figura
     /// </summary>
     /// 
-    /// <param name="filteredImg"> la imagen filtrada con únicamente la figura a tratar </param>
-    /// <param name="figureColor"> El color de la figura a tratar </param>
-    /// <param name="figureCenter"> EL centro en coordenadas de la figura a tratar </param>
-    /// 
-    /// <returns> Hypotenuse, un entero representante de la hipotenusa </returns>
-
-    private static int SetAvarageHypo(Bitmap filteredImg, Color figureColor, int[] figureCenter)
-    {
-        bool fuera = false;
-        int Hypotenuse = 0;
-        int i = 0;
-
-        while (!fuera)
-        {
-            if (!filteredImg.GetPixel(figureCenter[0] + i, figureCenter[1]).Equals(figureColor))
-            {
-                fuera = true;
-            }
-            i++;
-            Hypotenuse++;
-        }
-
-        return Hypotenuse/2;
-    }
-
-    /// <summary>
-    /// Método privado estático encargado de encontrar el centro de una figura
-    /// </summary>
-    /// 
-    /// <param name="figure"> la figura que se clasificará </param>
+    /// <param name="figure"> la figura que se clasificarï¿½ </param>
     /// 
     /// <returns> centerCoords, un arreglo con las coordenadas del centro de la figura</returns>
     private static int[] GetFigureCenter(Figure figure)
     {
 
         Bitmap figureBitmap = (Bitmap)figure.GetBitmap().Clone();
-
         Color bgColor = figureBitmap.GetPixel(0,0);
-
         Color figureColor = figure.GetColor();
-
         int[] centerCoords = new int[2];
+        int figurePixels = 0;
 
         centerCoords[0] = 0;
-        centerCoords[1] = 0;
-
-        int pixels = 0;
+        centerCoords[1] = 0;;
         
         for(int x = 0; x < figureBitmap.Width; x++)
         {
@@ -168,77 +162,92 @@ class FigureClasificator
                 {
                     centerCoords[0] += x;
                     centerCoords[1] += y;
-                    pixels++;
+                    figurePixels++;
                 }
             }
         }
 
-        centerCoords[0] /= pixels;
-        centerCoords[1] /= pixels;
+        centerCoords[0] /= figurePixels;
+        centerCoords[1] /= figurePixels;
 
        return centerCoords;
     }
 
+    /// <summary>
+    /// Obtenemos el nÃºmero de picos mÃ¡ximos que encontremos 
+    /// dentro de una seÃ±al suavizada.
+    /// </summary>
+    /// 
+    /// <param name="smoothSignal"> La seÃ±al suavizada a trabajar</param>
+    /// <return> numberPeaks, el nÃºmero de picos mÃ¡ximos registrados </return>
     private static int GetFigurePeaks(LinkedList<int> smoothSignal)
     {
-        int[] smoothArr = smoothSignal.ToArray();
-        LinkedList<int> peakIndices = new LinkedList<int>();
-        int peakIndex = -1;
-        int peakValue = -1;
-        int baseline = (int)smoothArr.Average();
-        Console.WriteLine("Baselina: " + baseline);
-        for(int i = 0; i<smoothArr.Length; i++)
+        int[] arrSmoothSignal = smoothSignal.ToArray();
+        int Baseline = (int)arrSmoothSignal.Average();
+        int numberPeaks = 0;
+        bool isAcending = false;
+
+        for(int i = 1; i< arrSmoothSignal.Length-1; i++)
         {
-            if (smoothArr[i] > baseline)
+            int LasDelta = arrSmoothSignal[i] - arrSmoothSignal[i-1];
+            int DeltaInFront = arrSmoothSignal[i+1] - arrSmoothSignal[i];
+            if (LasDelta > 0)
+                isAcending = true;
+            if (LasDelta < 0)
+                isAcending = false;
+            if (arrSmoothSignal[i] < Baseline)
+                continue;
+            if ((LasDelta > 0 && DeltaInFront < 0) || (LasDelta == 0 && DeltaInFront < 0) && isAcending)
             {
-                if(peakValue == -1 || smoothArr[i] > peakValue)
-                {
-                    peakValue = smoothArr[i];
-                    peakIndex = i;
-                }
-            }
-            else if (peakIndex != -1)
-            {
-                peakIndices.AddLast(peakIndex);
-                peakIndex = -1;
-                peakValue = -1;
+                numberPeaks++;
+                isAcending = false;
             }
         }
-        if(peakIndex != -1)
-        {
-            peakIndices.AddLast(peakIndex);
-        }
-        return peakIndices.Count;
+        if (isAcending)
+            numberPeaks++;
+
+        return numberPeaks;
     }
 
-    private static int GetAverage(int[] peaks, int low, int high)
+    /// <summary>
+    /// MÃ©todo auxiliar para calcular un promedio entre un intervalo de un arreglo
+    /// </summary>
+    /// 
+    /// <param name="partialSignal"> El intervalo donde vamos a promediar </param>
+    /// <param name="start"> el Ã­ndice de inicio, inicio del subArreglo </param>
+    /// <param name="finish"> el Ã­ndice final, lÃ­mite del subArreglo </param>
+    /// <return> promedio del subarreglo </return>
+    private static int GetAverage(int[] partialSignal, int start, int finish)
     {
         int sum = 0;
 
-        int total = high-low;
+        int total = finish-start;
 
-        for(int idx = low; idx <= high; idx++)
+        for(int idx = start; idx <= finish; idx++)
         {
-            sum += peaks[idx];
+            sum += partialSignal[idx];
         }
 
 
         return sum/total;
     }
 
-    private static LinkedList<int> SmoothSignal(int[] peaksArray, int smothie)
+    /// <summary>
+    /// Suaviza una seÃ±al promediando intervalos
+    /// </summary>
+    /// 
+    /// <param name="signal"> Un arreglo, la seÃ±al recibida </param>
+    /// <param name="range"> el rango de cuantos valores frente y detrÃ¡s consideraremos para el promedio </param>
+    /// <return> smoothSignal, la seÃ±al suavizada </return>
+    private static LinkedList<int> SmoothSignal(int[] signal, int range)
     {
         LinkedList<int> smoothSignal = new LinkedList<int>();
 
-
-        for(int idx = smothie ;idx < peaksArray.Length-smothie; idx++)
+        for(int idx = range ;idx < signal.Length-range; idx++)
         {
-            int val = peaksArray[idx];
-
-
-            smoothSignal.AddLast(GetAverage(peaksArray,idx-smothie,idx+smothie)); 
+            int val = signal[idx];
+            smoothSignal.AddLast(GetAverage(signal,idx-range,idx+range)); 
         }
-
 
         return smoothSignal;
     }
